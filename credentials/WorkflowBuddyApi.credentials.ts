@@ -17,7 +17,7 @@ export class WorkflowBuddyApi implements ICredentialType {
 	};
 
 	documentationUrl =
-		'https://github.com/TODO-GITHUB-OWNER/n8n-nodes-workflowbuddy?tab=readme-ov-file#credentials';
+		'https://github.com/amelus-ug/n8n-nodes-workflowbuddy?tab=readme-ov-file#credentials';
 
 	properties: INodeProperties[] = [
 		{
