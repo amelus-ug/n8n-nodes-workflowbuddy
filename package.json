@@ -13,7 +13,10 @@
     "iphone",
     "apns"
   ],
-  "author": { "name": "Tino Anic", "email": "anic@web.de" },
+  "author": {
+    "name": "Tino Anic",
+    "email": "anic@web.de"
+  },
   "repository": {
     "type": "git",
     "url": "https://github.com/TODO-GITHUB-OWNER/n8n-nodes-workflowbuddy.git"
@@ -25,21 +28,32 @@
     "lint": "n8n-node lint",
     "lint:fix": "n8n-node lint --fix",
     "release": "n8n-node release",
-    "prepublishOnly": "n8n-node prerelease"
+    "prepublishOnly": "n8n-node prerelease",
+    "test": "vitest run",
+    "mock": "node test/mock-server.mjs"
   },
-  "files": ["dist"],
+  "files": [
+    "dist"
+  ],
   "n8n": {
     "n8nNodesApiVersion": 1,
     "strict": true,
-    "credentials": ["dist/credentials/WorkflowBuddyApi.credentials.js"],
-    "nodes": ["dist/nodes/WorkflowBuddy/WorkflowBuddy.node.js"]
+    "credentials": [
+      "dist/credentials/WorkflowBuddyApi.credentials.js"
+    ],
+    "nodes": [
+      "dist/nodes/WorkflowBuddy/WorkflowBuddy.node.js"
+    ]
   },
   "devDependencies": {
     "@n8n/node-cli": "^0.34.0",
     "eslint": "9.29.0",
     "prettier": "3.6.2",
     "release-it": "^19.0.4",
-    "typescript": "5.9.2"
+    "typescript": "5.9.2",
+    "vitest": "^4.1.8"
   },
-  "peerDependencies": { "n8n-workflow": "*" }
+  "peerDependencies": {
+    "n8n-workflow": "*"
+  }
 }
