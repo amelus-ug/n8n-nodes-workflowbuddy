@@ -1,0 +1,33 @@
+{
+	"name": "Phone alert on workflow errors",
+	"nodes": [
+		{
+			"parameters": {},
+			"id": "f1d2a3b4-0000-4000-8000-000000000001",
+			"name": "Error Trigger",
+			"type": "n8n-nodes-base.errorTrigger",
+			"typeVersion": 1,
+			"position": [0, 0]
+		},
+		{
+			"parameters": {
+				"operation": "sendNotification",
+				"title": "=Workflow failed: {{ $json.workflow.name }}",
+				"message": "={{ $json.execution.error.message }} — {{ $json.execution.url }}",
+				"severity": "critical"
+			},
+			"id": "f1d2a3b4-0000-4000-8000-000000000002",
+			"name": "WorkflowBuddy",
+			"type": "n8n-nodes-workflowbuddy.workflowBuddy",
+			"typeVersion": 1,
+			"position": [220, 0]
+		}
+	],
+	"connections": {
+		"Error Trigger": {
+			"main": [[{ "node": "WorkflowBuddy", "type": "main", "index": 0 }]]
+		}
+	},
+	"settings": {},
+	"pinData": {}
+}

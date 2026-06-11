@@ -1,46 +1,96 @@
 # n8n-nodes-workflowbuddy
 
-This is an n8n community node. It lets you use _app/service name_ in your n8n workflows.
+This is an [n8n](https://n8n.io/) community node that sends **push notifications to your iPhone** via the [WorkflowBuddy](https://apps.apple.com/app/id6760253861) app — straight from your workflows, with no Slack, Telegram, or e-mail detour.
 
-_App/service name_ is _one or two sentences describing the service this node integrates with_.
+[WorkflowBuddy](https://www.amelus.de) is an iOS companion app for n8n that monitors your workflows and notifies you on your phone when something needs your attention.
 
 [n8n](https://n8n.io/) is a [fair-code licensed](https://docs.n8n.io/sustainable-use-license/) workflow automation platform.
 
-[Installation](#installation)
-[Operations](#operations)
-[Credentials](#credentials)
-[Compatibility](#compatibility)
-[Usage](#usage)
+<!-- TODO before submission: add screenshot of the node inside the n8n editor (docs/images/node-editor.png) -->
+
+[Installation](#installation) ·
+[Operations](#operations) ·
+[Credentials](#credentials) ·
+[Usage](#usage) ·
+[Limits](#limits) ·
+[Compatibility](#compatibility) ·
 [Resources](#resources)
-[Version history](#version-history)
 
 ## Installation
 
-Follow the [installation guide](https://docs.n8n.io/integrations/community-nodes/installation/) in the n8n community nodes documentation.
+Follow the [installation guide](https://docs.n8n.io/integrations/community-nodes/installation/) in the n8n community nodes documentation:
+
+1. In n8n, go to **Settings → Community Nodes**.
+2. Select **Install** and enter `n8n-nodes-workflowbuddy`.
+3. Agree to the risks of community nodes and select **Install**.
+
+After installation, the **WorkflowBuddy** node appears in the node search panel.
 
 ## Operations
 
-_List the operations supported by your node._
+### Send Notification
+
+Sends a push notification to your iPhone.
+
+| Field    | Required | Description                                                                                                      |
+| -------- | -------- | ---------------------------------------------------------------------------------------------------------------- |
+| Title    | yes      | Notification title, max 120 characters                                                                            |
+| Message  | yes      | Notification body, max 1000 characters                                                                            |
+| Severity | no       | `info` (default), `warning`, or `critical`. Currently stored as metadata only — it does not change how the notification is displayed. |
+
+Good to know:
+
+- Tapping the notification opens the WorkflowBuddy app.
+- Notifications sent through this node are delivered even during the quiet hours configured in the app.
+- The node can be used as a **tool by AI agents** (e.g. "notify me on my phone when you are done").
 
 ## Credentials
 
-_If users need to authenticate with the app/service, provide details here. You should include prerequisites (such as signing up with the service), available authentication methods, and how to set them up._
+You need the WorkflowBuddy iOS app and an API key:
 
-## Compatibility
+1. Install [WorkflowBuddy from the App Store](https://apps.apple.com/app/id6760253861) (a free tier is available).
+2. In the app, open **Settings → Push API** and copy your API key (it starts with `wb_`).
+3. In n8n, create a **WorkflowBuddy API** credential and paste the key.
 
-_State the minimum n8n version, as well as which versions you test against. You can also include any known version incompatibility issues._
+Use the **Test** button on the credential to verify the key — this checks your key against the API **without** sending a notification to your phone.
+
+If a key is ever compromised, revoke and regenerate it in the app under **Settings → Push API**.
 
 ## Usage
 
-_This is an optional section. Use it to help users with any difficult or confusing aspects of the node._
+A typical setup is an error workflow that pings your phone whenever any workflow fails:
 
-_By the time users are looking for community nodes, they probably already know n8n basics. But if you expect new users, you can link to the [Try it out](https://docs.n8n.io/try-it-out/) documentation to help them get started._
+1. Create a new workflow with an **Error Trigger** node.
+2. Add the **WorkflowBuddy** node (see [examples/error-alert-workflow.json](examples/error-alert-workflow.json) for an importable example).
+3. In your other workflows, set this workflow as the error workflow (**Workflow Settings → Error Workflow**).
+
+Example field values in the WorkflowBuddy node:
+
+- **Title:** `Workflow failed: {{ $json.workflow.name }}`
+- **Message:** `{{ $json.execution.error.message }} — {{ $json.execution.url }}`
+- **Severity:** `critical`
+
+<!-- TODO before submission: add screenshot of the example error workflow (docs/images/error-workflow.png) -->
+
+## Limits
+
+Push delivery is subject to the limits of your WorkflowBuddy plan (these may change over time):
+
+- **Free:** currently 50 pushes/day, 10/min burst
+- **Premium:** currently 500 pushes/day, 60/min
+
+When a limit is reached, the API responds with `429` and the node fails with a clear error message. Validation errors (`400`), invalid keys (`401`), and temporary delivery problems (`502`/`503`) are also reported with actionable messages.
+
+## Compatibility
+
+Requires n8n version 1.x or newer. Developed and tested against n8n 2.25.
 
 ## Resources
 
-* [n8n community nodes documentation](https://docs.n8n.io/integrations/#community-nodes)
-* _Link to app/service documentation._
+- [WorkflowBuddy on the App Store](https://apps.apple.com/app/id6760253861)
+- [Amelus UG — the company behind WorkflowBuddy](https://www.amelus.de)
+- [n8n community nodes documentation](https://docs.n8n.io/integrations/#community-nodes)
 
-## Version history
+## License
 
-_This is another optional section. If your node has multiple versions, include a short description of available versions and what changed, as well as any compatibility impact._
+[MIT](LICENSE.md)
