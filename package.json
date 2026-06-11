@@ -1,14 +1,22 @@
 {
   "name": "n8n-nodes-workflowbuddy",
   "version": "0.1.0",
-  "description": "",
+  "description": "n8n community node for WorkflowBuddy — send push notifications to your iPhone from your workflows",
   "license": "MIT",
-  "homepage": "",
-  "keywords": ["n8n-community-node-package"],
+  "homepage": "https://www.amelus.de",
+  "keywords": [
+    "n8n-community-node-package",
+    "workflowbuddy",
+    "push-notifications",
+    "notifications",
+    "ios",
+    "iphone",
+    "apns"
+  ],
   "author": { "name": "Tino Anic", "email": "anic@web.de" },
   "repository": {
     "type": "git",
-    "url": "https://github.com/<...>/n8n-nodes-<...>.git"
+    "url": "https://github.com/TODO-GITHUB-OWNER/n8n-nodes-workflowbuddy.git"
   },
   "scripts": {
     "build": "n8n-node build",
@@ -23,12 +31,12 @@
   "n8n": {
     "n8nNodesApiVersion": 1,
     "strict": true,
-    "credentials": ["dist/credentials/WorkflowbuddyApi.credentials.js"],
-    "nodes": ["dist/nodes/Workflowbuddy/Workflowbuddy.node.js"]
+    "credentials": ["dist/credentials/WorkflowBuddyApi.credentials.js"],
+    "nodes": ["dist/nodes/WorkflowBuddy/WorkflowBuddy.node.js"]
   },
   "devDependencies": {
-    "@n8n/node-cli": "*",
-    "eslint": "9.32.0",
+    "@n8n/node-cli": "^0.34.0",
+    "eslint": "9.29.0",
     "prettier": "3.6.2",
     "release-it": "^19.0.4",
     "typescript": "5.9.2"

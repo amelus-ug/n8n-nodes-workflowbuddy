@@ -1,0 +1,18 @@
+{
+	"node": "n8n-nodes-workflowbuddy.workflowBuddy",
+	"nodeVersion": "1.0",
+	"codexVersion": "1.0",
+	"categories": ["Communication"],
+	"resources": {
+		"credentialDocumentation": [
+			{
+				"url": "https://github.com/TODO-GITHUB-OWNER/n8n-nodes-workflowbuddy?tab=readme-ov-file#credentials"
+			}
+		],
+		"primaryDocumentation": [
+			{
+				"url": "https://github.com/TODO-GITHUB-OWNER/n8n-nodes-workflowbuddy?tab=readme-ov-file"
+			}
+		]
+	}
+}
