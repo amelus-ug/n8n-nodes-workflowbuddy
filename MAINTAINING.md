@@ -47,12 +47,13 @@ Automated tests cover the contract, but to see the node inside a real n8n:
 
 Before the first release:
 
-1. Replace every `TODO-GITHUB-OWNER` placeholder (package.json `repository`, credential `documentationUrl`, `nodes/WorkflowBuddy/WorkflowBuddy.node.json`) with the real GitHub owner/org. npm `repository` URL and author **must match** the public GitHub repo (n8n verification requirement).
-2. Replace the placeholder icon (`nodes/WorkflowBuddy/workflowbuddy{,.dark}.svg`) with the real app icon (SVG preferred, otherwise 60×60 PNG; adjust the `icon` references in node + credential if the format changes).
-3. Verify the exact wording of the in-app path ("Settings → Push API") and fix README/descriptions if it differs.
-4. Add the README screenshots (placeholders are marked with `<!-- TODO ... -->`).
-5. Run one real end-to-end test against `https://companion.amelus.de` with a personal key.
-6. Set up npm Trusted Publishing (OIDC) for this repo — see the detailed comments in [.github/workflows/publish.yml](.github/workflows/publish.yml).
+1. Replace every `TODO-GITHUB-OWNER` placeholder (package.json `repository`, credential `documentationUrl`, `nodes/WorkflowBuddy/WorkflowBuddy.node.json`) with the real GitHub owner/org. npm `repository` URL and author **must match** the public GitHub repo (n8n verification requirement). The publisher is **Amelus UG (haftungsbeschränkt)** — the npm account used for publishing must reflect that identity (author email is currently `tino.anic@amelus.de`).
+2. Verify the exact wording of the in-app path ("Settings → Push API") and fix README/descriptions if it differs.
+3. Add the README screenshots (placeholders are marked with `<!-- TODO ... -->`).
+4. Run one real end-to-end test against `https://companion.amelus.de` with a personal key.
+5. Set up npm Trusted Publishing (OIDC) for this repo — see the detailed comments in [.github/workflows/publish.yml](.github/workflows/publish.yml).
+
+The node icon is the real app icon (iOS "Default" export for n8n's light UI, "Dark" export for dark UI) from `n8n-companion/.../Assets.xcassets/Icon Exports/`. The linter requires `.svg` icons, and no vector source exists, so each icon is the 256×256 PNG base64-embedded in an SVG wrapper (`<image href="data:image/png;base64,…">`). If the app icon changes, regenerate both files the same way.
 
 Release process (after the gate is lifted):
 
