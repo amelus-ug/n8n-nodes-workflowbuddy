@@ -43,15 +43,23 @@ Automated tests cover the contract, but to see the node inside a real n8n:
 
 ## Releasing
 
-⛔ **Publishing gate:** do not publish to npm or submit for verification until (a) the app version with the Push API UI (Settings → Push API) is live in the App Store and (b) `companion.amelus.de/api/notify` is deployed to production. The WorkflowBuddy team will give the go-ahead.
+~~⛔ **Publishing gate:** do not publish to npm or submit for verification until (a) the app version with the Push API UI (Settings → Push API) is live in the App Store and (b) `companion.amelus.de/api/notify` is deployed to production. The WorkflowBuddy team will give the go-ahead.~~
 
-Before the first release:
+✅ **GATE LIFTED — 2026-08-03.** Both conditions have in fact been met since **2026-06-10**; the gate simply outlived them by eight weeks because nobody checked. Verified on 2026-08-03:
 
-1. The GitHub owner is `amelus-ug` (set in package.json `repository`, the credential `documentationUrl`, and `nodes/WorkflowBuddy/WorkflowBuddy.node.json`). npm `repository` URL and author **must match** the public GitHub repo (n8n verification requirement). The publisher is **Amelus UG (haftungsbeschränkt)** — the npm account used for publishing must reflect that identity (author email is currently `tino.anic@amelus.de`).
-2. Verify the exact wording of the in-app path ("Settings → Push API") and fix README/descriptions if it differs.
-3. Add the README screenshots (placeholders are marked with `<!-- TODO ... -->`).
-4. Run one real end-to-end test against `https://companion.amelus.de` with a personal key.
-5. Set up npm Trusted Publishing (OIDC) for this repo — see the detailed comments in [.github/workflows/publish.yml](.github/workflows/publish.yml).
+- **(a) App:** WorkflowBuddy **2.2.0**, carrying *Settings → Push API*, has been `READY_FOR_SALE` in the App Store since 2026-06-10.
+- **(b) Backend:** `POST https://companion.amelus.de/api/notify` is live and behaves as documented. Probed from outside: no key, malformed key, missing `Authorization` header and a `Basic` scheme all return `401 {"error":"Unauthorized"}`; `/health` returns `200`.
+- **Auth-before-validation still holds** — the ordering this package's credential test depends on. An empty body with an invalid key returns `401`, not `400`, so authentication is evaluated first. (The complementary case — *valid* key + empty body → `400` — cannot be probed without a real key from the app and is the one remaining unverified step; see the checklist below.)
+
+**Lesson worth keeping:** this gate, the identical one in `n8n-templates/CLAUDE.md`, and the templates publishing hold all expired on the same day and all went unnoticed for the same eight weeks. A gate needs a named owner and a check date, otherwise it silently becomes the blocker it was meant to prevent.
+
+Before the first release — **status checked 2026-08-03**, items 3 and 5 are what actually block the first publish:
+
+1. ✅ **Done.** The GitHub owner is `amelus-ug` (set in package.json `repository`, the credential `documentationUrl`, and `nodes/WorkflowBuddy/WorkflowBuddy.node.json`). npm `repository` URL and author **must match** the public GitHub repo (n8n verification requirement). The publisher is **Amelus UG (haftungsbeschränkt)** — the npm account used for publishing must reflect that identity (author email is currently `tino.anic@amelus.de`).
+2. ✅ **Verified 2026-08-03** against the app's own `Localizable.xcstrings`, not against memory or the handoff doc. The menu entry `settings.push_api` and the view title `push_api.title` both read **"Push API"** in de/en and **"API Push"** in es/fr. The README's "Settings → Push API" is therefore correct for the English UI, and the localized variants quoted in the templates brief ("Einstellungen → Push API", "Ajustes → API Push", "Réglages → API Push") match the shipped strings.
+3. ⬜ **Open — needs a local n8n.** Two `<!-- TODO before submission -->` placeholders remain (README lines 9 and 73). `npm run dev` boots n8n 2.32.7 with this package linked in about 70 s; the editor then asks for a local owner account before the canvas is reachable. Add the README screenshots (placeholders are marked with `<!-- TODO ... -->`).
+4. ⬜ **Open — needs a Notify Key from the app.** The contract was probed from outside on 2026-08-03 (see the gate note above): auth-before-validation holds, all four unauthenticated variants return `401`. What is still unproven is the *happy path* — a real push arriving on a real iPhone. That needs a key from **Settings → Push API**, which only exists on an installed app. Run one real end-to-end test against `https://companion.amelus.de` with a personal key.
+5. ⬜ **Open — the hard blocker.** `npm whoami` reports no login on this machine, and `registry.npmjs.org/n8n-nodes-workflowbuddy` returns **404**: the package has never been published, so **nobody can install this node** — n8n's *Settings → Community Nodes* installs from npm. Until this is done the repo being public on GitHub buys nothing. Set up npm Trusted Publishing (OIDC) for this repo — see the detailed comments in [.github/workflows/publish.yml](.github/workflows/publish.yml).
 
 The node icon is the real app icon (iOS "Default" export for n8n's light UI, "Dark" export for dark UI) from `n8n-companion/.../Assets.xcassets/Icon Exports/`. The linter requires `.svg` icons, and no vector source exists, so each icon is the 256×256 PNG base64-embedded in an SVG wrapper (`<image href="data:image/png;base64,…">`). If the app icon changes, regenerate both files the same way.
 
