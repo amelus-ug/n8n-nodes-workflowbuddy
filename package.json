@@ -3,6 +3,9 @@
   "version": "0.2.0",
   "description": "n8n community node for WorkflowBuddy — send push notifications to your iPhone from your workflows",
   "license": "MIT",
+  "publishConfig": {
+    "access": "public"
+  },
   "homepage": "https://www.amelus.de",
   "keywords": [
     "n8n-community-node-package",
