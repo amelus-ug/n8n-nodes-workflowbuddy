@@ -6,6 +6,8 @@ This is an [n8n](https://n8n.io/) community node that sends **push notifications
 
 [n8n](https://n8n.io/) is a [fair-code licensed](https://docs.n8n.io/sustainable-use-license/) workflow automation platform.
 
+**On Android?** WorkflowBuddy is iOS-only today; an Android version is under consideration. [One click tells us you're waiting](https://www.amelus.de/workflowbuddy/android/en.html?src=node).
+
 <!-- TODO before submission: add screenshot of the node inside the n8n editor (docs/images/node-editor.png) -->
 
 [Installation](#installation) ·
