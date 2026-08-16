@@ -53,6 +53,30 @@ Automated tests cover the contract, but to see the node inside a real n8n:
 
 **Lesson worth keeping:** this gate, the identical one in `n8n-templates/CLAUDE.md`, and the templates publishing hold all expired on the same day and all went unnoticed for the same eight weeks. A gate needs a named owner and a check date, otherwise it silently becomes the blocker it was meant to prevent.
 
+### Check before **every** release — owner: Tino
+
+Two things that are easy to miss and expensive to miss. Both come from the 2026-08-16 attribution
+work (`auftraege/erledigt/2026-08-16-klick-attribution-readme.md`).
+
+- **The README's install links point at a redirect we operate, not at Apple.** All three read
+  `https://amelus.de/go/node`, served by nginx on `amelus-hp` (302 → App Store, click logged).
+  If that redirect ever moves or breaks, the package's only install path breaks with it, and npm
+  keeps serving the broken link until the *next* release. Verify before publishing:
+
+  ```bash
+  curl -s -o /dev/null -w '%{http_code} %{redirect_url}\n' https://amelus.de/go/node   # expect: 302 https://apps.apple.com/…
+  ```
+
+- **How this package authenticates to npm is an open contradiction — resolve it before tagging.**
+  `0.2.1` was published on 2026-08-03 with a granular token that had the 2FA bypass enabled (item 5
+  below); Trusted Publishing (OIDC) was recorded there as the *next* step, while the company wiki
+  records it as already done and the token as deleted. Both cannot be true. It matters because
+  [.github/workflows/publish.yml](.github/workflows/publish.yml) writes a **present** `NPM_TOKEN`
+  secret into `.npmrc` before publishing: if the secret still exists but has expired (the token
+  expired 2026-08-10), the run fails with a 401 instead of falling back to OIDC. Check the repo
+  secret `NPM_TOKEN` and the npm package's Trusted Publishers entry — both are console work,
+  neither can be verified from inside this repo.
+
 Before the first release — **status checked 2026-08-03**, items 3 and 5 are what actually block the first publish:
 
 1. ✅ **Done.** The GitHub owner is `amelus-ug` (set in package.json `repository`, the credential `documentationUrl`, and `nodes/WorkflowBuddy/WorkflowBuddy.node.json`). npm `repository` URL and author **must match** the public GitHub repo (n8n verification requirement). The publisher is **Amelus UG (haftungsbeschränkt)** — the npm account used for publishing must reflect that identity (author email is currently `tino.anic@amelus.de`).

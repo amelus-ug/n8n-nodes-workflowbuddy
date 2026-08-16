@@ -1,12 +1,12 @@
 # n8n-nodes-workflowbuddy
 
-This is an [n8n](https://n8n.io/) community node that sends **push notifications to your iPhone** via the [WorkflowBuddy](https://www.amelus.de/go/node) app — straight from your workflows, with no Slack, Telegram, or e-mail detour.
+This is an [n8n](https://n8n.io/) community node that sends **push notifications to your iPhone** via the [WorkflowBuddy](https://amelus.de/go/node) app — straight from your workflows, with no Slack, Telegram, or e-mail detour.
 
-[WorkflowBuddy](https://www.amelus.de) is an iOS companion app for n8n that monitors your workflows and notifies you on your phone when something needs your attention.
+[WorkflowBuddy](https://amelus.de) is an iOS companion app for n8n that monitors your workflows and notifies you on your phone when something needs your attention.
 
 [n8n](https://n8n.io/) is a [fair-code licensed](https://docs.n8n.io/sustainable-use-license/) workflow automation platform.
 
-**On Android?** WorkflowBuddy is iOS-only today; an Android version is under consideration. [One click tells us you're waiting](https://www.amelus.de/workflowbuddy/android/en.html?src=node).
+**On Android?** WorkflowBuddy is iOS-only today; an Android version is under consideration. [One click tells us you're waiting](https://amelus.de/workflowbuddy/android/en.html?src=node).
 
 <!-- TODO before submission: add screenshot of the node inside the n8n editor (docs/images/node-editor.png) -->
 
@@ -50,7 +50,7 @@ Good to know:
 
 You need the WorkflowBuddy iOS app and an API key:
 
-1. Install [WorkflowBuddy from the App Store](https://www.amelus.de/go/node) (a free tier is available).
+1. Install [WorkflowBuddy from the App Store](https://amelus.de/go/node) (a free tier is available).
 2. In the app, open **Settings → Push API** and copy your API key (it starts with `wb_`).
 3. In n8n, create a **WorkflowBuddy API** credential and paste the key.
 
@@ -89,8 +89,8 @@ Requires n8n version 1.x or newer. Developed and tested against n8n 2.25.
 
 ## Resources
 
-- [WorkflowBuddy on the App Store](https://www.amelus.de/go/node)
-- [Amelus UG — the company behind WorkflowBuddy](https://www.amelus.de)
+- [WorkflowBuddy on the App Store](https://amelus.de/go/node)
+- [Amelus UG — the company behind WorkflowBuddy](https://amelus.de)
 - [n8n community nodes documentation](https://docs.n8n.io/integrations/#community-nodes)
 
 ## License

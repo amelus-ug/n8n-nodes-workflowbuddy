@@ -176,10 +176,19 @@ Der Vorbehalt oben ist erledigt. `amelus-hp` hat die Weiterleitung fertiggestell
 (`9cfe7c0..1f86f67`). Am öffentlichen Stand nachgeprüft: `raw.githubusercontent.com/.../main/README.md`
 enthält **0×** `apps.apple.com`, **3×** `/go/node` und die Android-Zeile.
 
-Zur `www.`-Frage aus eurem Bericht: Wir bleiben bei `https://www.amelus.de/go/node`, weil die
-übrigen Links in dieser README ebenfalls `www.` verwenden. Laut eurem Bericht und nach eigener
+Zur `www.`-Frage aus eurem Bericht zunächst: Wir bleiben bei `https://www.amelus.de/go/node`, weil
+die übrigen Links in dieser README ebenfalls `www.` verwenden. Laut eurem Bericht und nach eigener
 Messung liefert diese Form eine 302 — falls ihr später auf die nackte Domain vereinheitlichen
 wollt, sagt Bescheid, das ist eine Zeile.
+
+**Zweiter Nachtrag, 2026-08-16 — auf die kanonische Domain umgestellt.** `n8n-companion` hat
+darum gebeten und die Kanonizität belegt (364 Vorkommen der nackten Domain, `rel=canonical` auf
+jeder Seite). Ein Amend war nicht mehr möglich, weil zu dem Zeitpunkt bereits gepusht war, also
+ist es ein Folge-Commit. Umgestellt wurden **alle sechs** `amelus.de`-Links der README, nicht nur
+die drei aus dem Auftrag: drei × `/go/node`, zwei × Startseite, einmal die Android-Seite. Nur die
+drei zu ändern hätte die Datei in genau den zwei Formen hinterlassen, deren Uneinheitlichkeit der
+Anlass der Korrektur war. Vorher gemessen, alle Formen antworten: `/go/node` → 302 auf den App
+Store, Startseite → 200, Android-Seite → 200.
 
 Unverändert gilt: **keine Veröffentlichung.** npm und n8n zeigen weiterhin die README von 0.2.1.
 
