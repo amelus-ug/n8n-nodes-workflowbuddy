@@ -1,6 +1,6 @@
 # n8n-nodes-workflowbuddy
 
-This is an [n8n](https://n8n.io/) community node that sends **push notifications to your iPhone** via the [WorkflowBuddy](https://apps.apple.com/app/id6760253861) app — straight from your workflows, with no Slack, Telegram, or e-mail detour.
+This is an [n8n](https://n8n.io/) community node that sends **push notifications to your iPhone** via the [WorkflowBuddy](https://www.amelus.de/go/node) app — straight from your workflows, with no Slack, Telegram, or e-mail detour.
 
 [WorkflowBuddy](https://www.amelus.de) is an iOS companion app for n8n that monitors your workflows and notifies you on your phone when something needs your attention.
 
@@ -50,7 +50,7 @@ Good to know:
 
 You need the WorkflowBuddy iOS app and an API key:
 
-1. Install [WorkflowBuddy from the App Store](https://apps.apple.com/app/id6760253861) (a free tier is available).
+1. Install [WorkflowBuddy from the App Store](https://www.amelus.de/go/node) (a free tier is available).
 2. In the app, open **Settings → Push API** and copy your API key (it starts with `wb_`).
 3. In n8n, create a **WorkflowBuddy API** credential and paste the key.
 
@@ -89,7 +89,7 @@ Requires n8n version 1.x or newer. Developed and tested against n8n 2.25.
 
 ## Resources
 
-- [WorkflowBuddy on the App Store](https://apps.apple.com/app/id6760253861)
+- [WorkflowBuddy on the App Store](https://www.amelus.de/go/node)
 - [Amelus UG — the company behind WorkflowBuddy](https://www.amelus.de)
 - [n8n community nodes documentation](https://docs.n8n.io/integrations/#community-nodes)
 
