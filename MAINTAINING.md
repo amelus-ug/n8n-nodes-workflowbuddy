@@ -67,6 +67,15 @@ work (`auftraege/erledigt/2026-08-16-klick-attribution-readme.md`).
   curl -s -o /dev/null -w '%{http_code} %{redirect_url}\n' https://amelus.de/go/node   # expect: 302 https://apps.apple.com/…
   ```
 
+  **That check is necessary but not sufficient, and it is worth knowing why.** nginx on `amelus-hp`
+  answers *every* `/go/<anything>` with the same 302 to the same App Store URL — measured on
+  2026-08-16: `/go/node`, `/go/web-de` and an invented `/go/gibtsnicht-xyz123` are indistinguishable
+  from outside. A typo in the slug would therefore pass this test while quietly logging the click
+  as a fallback, and per-channel attribution would be wrong without anything looking broken. What
+  the slug is actually registered as can only be seen on the other side, in the `map $uri
+  $go_target` in `amelus-hp/deploy/nginx-go-signal.conf` and in the `$go_known` column of the
+  access log. If the slug in this README ever changes, that change has to be made there too.
+
 - **How this package authenticates to npm is an open contradiction — resolve it before tagging.**
   `0.2.1` was published on 2026-08-03 with a granular token that had the 2FA bypass enabled (item 5
   below); Trusted Publishing (OIDC) was recorded there as the *next* step, while the company wiki
